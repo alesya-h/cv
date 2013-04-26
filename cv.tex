@@ -52,14 +52,14 @@ Operating Systems     & Linux (Arch, Debian, CentOS, Ubuntu), Mac OS X \smallski
 Programming Languages & Ruby, C, Bourne-compatible shells, JavaScript, ANSI Common Lisp, \\
                       & Factor, Scheme, Erlang, C++, Lua, Scala, Perl, Python and more\smallskip \\
 Markup and Typesetting & \LaTeX, HTML 4.01, XHTML 1.1, HTML5, HAML, CSS2, CSS3, \\
-                       & SASS, Less, Twitter Bootstrap \smallskip \\
+                       & SASS/SCSS, Less, Twitter Bootstrap \smallskip \\
 Server technologies   & Nginx, Apache httpd, OpenSSH, Postfix, Prosody, vsftpd, Squid, \\
                       & Chef, Corosync, Pacemaker, DRBD \smallskip \\
 Databases & MySQL/MariaDB, PostgreSQL, SQLite, MongoDB, Cassandra \smallskip \\
-Tools & Zsh, Git, Vim, Emacs, gpicker, ctags, the silver searcher, \\
+Tools & zsh, git, tmux, vim, emacs, gpicker, ctags, the silver searcher, \\
       &    GNU Global, splint, gdb, strace, valgrind, gprof \smallskip \\
-Programming paradigms & Imperative, Functional, Object-oriented (class-based, prototype-based, \\
-                      & with message-passing and generic functions), Concatenative.
+Programming paradigms & Imperative, Object-oriented (class-based, prototype-based), \\
+                      & Functional, Concatenative.
 \end{tabular}
 
 \end{rSection}
@@ -93,8 +93,8 @@ Programming paradigms & Imperative, Functional, Object-oriented (class-based, pr
 \begin{rSubsection}{PowerMeMobile, Inc.}{January 2013 - February 2013}{Problem solver}{Minsk, Belarus}
 \item Gave an idea of automating deployment process (new tier deployments may take up to
   a month of SysAdmin team work)
-\item Implemented initial stages of deployment automation (bootstrapping corosync/pacemaker cluster,
-  installing and configuring DRBD and nginx) using Chef
+\item Implemented initial stages of deployment automation (installing base cluster software,
+  configuring corosync/pacemaker, installing and configuring DRBD and nginx as resource agents) using Chef
 \item Made entire deployment configurable from a single place (from chef workstation using node attributes)
 \item Got an agreement on opensourcing this efforts.
 \end{rSubsection}
@@ -107,7 +107,8 @@ Programming paradigms & Imperative, Functional, Object-oriented (class-based, pr
 
 \begin{rSubsection}{Itransition, Inc.}{February 2011 - October 2011}{Junior Developer in Ruby department}{Minsk, Belarus}
 \item Solely ported large social gaming engine from Rails 2 to Rails 3.
-\item Initiated using SASS and Compass, which led to development speedup and stylesheets support simplification.
+\item Initiated using SCSS and Compass, which led to development speedup and stylesheets support simplification.
+\item Configured production server from scratch for automated Capistrano deployment
 \end{rSubsection}
 
 \end{rSection}
@@ -116,14 +117,21 @@ Programming paradigms & Imperative, Functional, Object-oriented (class-based, pr
 %	NOTES SECTION
 %----------------------------------------------------------------------------------------
 
-\begin{rSection}{Some facts about me}
+\begin{rSection}{Some random facts}
   \smallskip
   \begin{list}{$\cdot$}{\leftmargin=0em} % \cdot used for bullets, no indentation
     \itemsep -0.5em \vspace{-0.5em} % Compress items in list together for aesthetics
-  \item I touch type using Dvorak keyboard layout
+  \item I use Dvorak keyboard layout
   \item I like cycling
+  \item First time I installed and started playing with linux was 8 years ago (it was
+    Mandrake 10 in 2005)
+  %% \item This summer I took part in ``System administrator 2012'' (http://admin2012.ru)
+  %%   contest and surprisingly received ``Guru'' certificate (top 4.1\%)
+  \item Somewhere in the past I was passionate about japanese animation, so I learned
+    some japanese (have JLPT4 certificate)
   \item I use CLFSWM (Common Lisp FullScreen Window Manager) which is pretty unique tiling
-    window manager. I like to tell that I've contributed to it, as this thing is really cool.
+    window manager. I like to tell people that I've contributed to it, as this thing
+    is really cool.
   \item I am in an eternal search for a perfectly expressive programming language.
   \end{list}
 \end{rSection}
