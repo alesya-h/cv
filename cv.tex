@@ -72,14 +72,15 @@ Programming paradigms & Imperative, Object-oriented (class-based, prototype-base
 \begin{rSection}{Work positions}
 
 \begin{rSubsection}{Filemporium}{July 2015 - Present}{Lead Clojure Developer}{Remote via Upwork}
-\item Temporarily setup server deplyoment via docker and dokku
+\item Setup temporary deplyoment via docker and dokku
 \item Revised architecture in a way that drastically simplified client-side
   state management and allowed live page update of all active user sessions
 \item Reengineered project build system using boot (previously leiningen were used).
   Fixed project build time (full recompilation now takes just a couple of minutes
   instead of an hour). Adjusted project code to work with reloaded workflow.
+\item Documented project structure, project-specific code conventions, technical decisions, troubleshooting, and Amazon S3 project-specific step-by-step configuration guide
 \item Refactored most of the project
-\item Added configuration validation
+\item Added config file validation
 \item Cleaned up garbage logging (like {\tt (println "!!! FOO:" x)}) and implemented
   propper configurable logging throughout the system
 \item Implemented chunked file upload with automatic reconnection
