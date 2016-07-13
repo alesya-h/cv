@@ -48,14 +48,14 @@ B.S. in Systems Engineering \\
 \begin{rSection}{Have experience with}
 
 \begin{tabular}{ @{} >{\bfseries}l @{\hspace{6ex}} l }
-Operating Systems     & Linux (Arch, Debian, CentOS, Ubuntu), Mac OS X \smallskip \\
+Operating Systems     & Linux (NixOS, Arch, Debian, CentOS, Ubuntu), Mac OS X \smallskip \\
 Programming Languages & Clojure, Ruby, C, Bash, JavaScript, Perl, Common Lisp, Erlang, \\
-                      & Maude, Factor, Scheme, Lua, C++, Python and more\smallskip \\
+                      & Maude, Factor, Lua, Terra, C++, Python and some others\smallskip \\
 Markup and Typesetting & \LaTeX, HTML, Haml, Slim, CSS, SASS/SCSS, Less, Bootstrap \smallskip \\
-Server technologies   & Chef, Nginx, Apache httpd, OpenSSH, Postfix, Prosody, vsftpd,\\
-                      & Squid, Corosync, Pacemaker, DRBD, \smallskip \\
-Relational Databases & PostgreSQL, MySQL/MariaDB, SQLite \smallskip \\
-Non-relational Databases & Neo4j, OrientDB, MongoDB, Cassandra \smallskip \\
+Server technologies   & NixOps, Consul, Docker, Dokku, Chef, Nginx, Apache httpd, \\
+                      & Postfix, Prosody, vsftpd, Squid, Corosync, Pacemaker, DRBD \smallskip \\
+SQL Databases & PostgreSQL, MySQL/MariaDB, SQLite \smallskip \\
+  NoSQL Databases & Datomic/Datascript, Neo4j, OrientDB, MongoDB, Cassandra \smallskip \\
 % Tools & zsh, git, emacs, vim, tmux, gpicker, ctags, the silver searcher, \\
 %       & GNU Global, splint, gdb, strace, valgrind, gprof \smallskip \\
 Programming paradigms & Imperative, Object-oriented (class-based, prototype-based), \\
@@ -71,10 +71,36 @@ Programming paradigms & Imperative, Object-oriented (class-based, prototype-base
 
 \begin{rSection}{Work positions}
 
-\begin{rSubsection}{Filemporium}{May 2015 - Present}{Clojure Developer}{Remote via Upwork}
-\item Added support for using arbitrary npm libraries from ClojureScript code
-\item Added compile-time template checks to kioo templating library
-\item Converted project from leiningen to boot
+\begin{rSubsection}{Filemporium}{July 2015 - Present}{Lead Clojure Developer}{Remote via Upwork}
+\item Temporarily setup server deplyoment via docker and dokku
+\item Revised architecture in a way that drastically simplified client-side
+  state management and allowed live page update of all active user sessions
+\item Reengineered project build system using boot (previously leiningen were used).
+  Fixed project build time (full recompilation now takes just a couple of minutes
+  instead of an hour). Adjusted project code to work with reloaded workflow.
+\item Refactored most of the project
+\item Added configuration validation
+\item Cleaned up garbage logging (like {\tt (println "!!! FOO:" x)}) and implemented
+  propper configurable logging throughout the system
+\item Implemented chunked file upload with automatic reconnection
+\item Implemented production-ready multiserver setup with zero-downtime deployment using NixOS/NixOps and Consul
+\item Implemented lots of functionality and fixed lots of bugs
+\item Interviewed potential candidates
+\item Regularly did code reviews
+\item Did pair programming (to assist others with complicated tasks, to share project knowledge, to get
+  back on track when I'm stuck)
+\item Fired a programmer that have been writing terrible code
+\end{rSubsection}
+
+\begin{rSubsection}{Filemporium}{May 2015 - July 2015}{Clojure Developer}{Remote via Upwork}
+\item Automated design updates
+\item Added compile-time template checks to kioo templating library to ensure
+  component correctness after design update
+\item Added support for using arbitrary npm libraries from ClojureScript code (to be
+  able to utilize existing js React components)
+\item Started writing project documentation. Documented actions needed to setup
+  a project, update design, add npm library
+
 % ~
 \end{rSubsection}
 
@@ -143,16 +169,15 @@ Programming paradigms & Imperative, Object-oriented (class-based, prototype-base
   \item I started playing with Linux when I was 14 (it was Mandrake 10 in 2005)
   \item I use Dvorak keyboard layout
   \item I tend to automate everything I could.
-  \item I use Emacs for last 4-5 years. Last 3 years I use it with Evil (vim emulation layer)
+  \item I started using Emacs at 2010 and never looked back. Since 2011 I use it with Evil (vim emulation layer)
   \item I have a lot of personal opensource projects and have contributed to
-        upstream of at least 11 opensource projects.
+        upstream of at least 20 opensource projects.
   \item Some time ago I was passionate about japanese animation, so I learned
-        some japanese and passed an international exam (have JLPT4 certificate). I remember myself
+        some japanese and passed an international exam (JLPT4 certificate). I remember myself
         learning Esperanto and Toki Pona, and now I am learning Lojban.
-  \item Personality type ENTP.
   \item I am an active ACM and ACM SIGPLAN member.
   \item One of my primary interests is programming languages. I am still thinking of one
-        that would be perfectly expressive.
+        that would be perfectly expressive. I have plans for PhD in that field.
   \end{list}
 \end{rSection}
 
@@ -173,6 +198,7 @@ Programming paradigms & Imperative, Object-oriented (class-based, prototype-base
   \item Semantics
   \item Constructed languages
   \item Neuroscience
+  \item Statistics and Machine Learning
   \end{list}
 \end{rSection}
 
