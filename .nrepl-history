@@ -1,0 +1,7 @@
+(read-string-all "1 2")
+(read-string-all "#!/usr/bin/env ruby")
+(read-string-all "aoeu #!/usr/bin/env ruby")
+(read-string-all "aoeu #!/usr/bin/env ruby" true)
+(read-string-all "aoeu #!/usr/bin/env ruby aoeu")
+(read-string-all "aoeu #!/usr/bin/env ruby 234")
+(read-string-all "aoeu #!/usr/bin/env ruby \n 234")
