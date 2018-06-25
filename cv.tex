@@ -21,8 +21,6 @@
 \usepackage[left=0.75in,top=0.6in,right=0.75in,bottom=0.6in]{geometry} % Document margins
 
 \name{Ales Huzik} % Your name
-% \address{Minsk, Belarus} % Your address
-% \address{+375~29~575-1103 \\ me@aguzik.net} % Your phone number and email
 \address{Sydney, Australia} % Your address
 \address{+61~427~990-909 \\ me@aguzik.net} % Your phone number and email
 
@@ -75,40 +73,103 @@ Programming paradigms & Imperative, Object-oriented (class-based, prototype-base
 
 \begin{rSubsection}{Atlassian}{December 2016 - Present}{Senior Clojure Developer}{Sydney, Australia}
 
-% At the moment I have worked only 7.5 months. It is somewhat hard to evaluate my own performance, as I always think that I could have done so much more. Also, because I often tend to be interested in big, architecture-level changes, they go slower than I'd wish and it's harder to show. Nevertheless, since I joined the team I have done the following things:
-% - maintainability improvements:
-%   - reorganization of the code base
-%     - decluttered repository toplevel
-%     - cleaned up obsolete/abandoned branches (with automatic script to do that periodically)
-%   - shrinked application bundle size twice (from 100mb to 50mb), which made deployments noticeably faster
-%   - formulated automated versioning strategy in a way that does not require conscious effort from the developers, and is helpful for the server team to understand amount and severity of changes.
-%   - proposed and added jvm memory consumption metrics, so we can see when GC happens and can understand it's implications on the dynamic behavior of the system
-% - productivity
-%   - automation of manual deployments. allows developers to test changes in ddev/adev/staging faster. instead of commiting, and clicking your way through bamboo you can deploy your local code tree directly with just one command.
-%   - automation of versioning. Developers don't need to review all code changes since last version change and manually edit the version. After a while you don't even notice that you are doing versioning.
-% - Readability and understandability of the code
-%   - Insisted on starting doing proper code reviews. Found a compromise to start doing that after going 100% GA
-%   - created a glossary of terms for increasing consistency and noticing ambiguities in naming we use, so that we can improve it.
-%   - have been doing code reviews. gave suggestions on improving naming
-%   - insisted on strict adherence to our code style guide
-% - Architecture
-%   - Reworking build process (cleaned up a lot of obsolete stuff, simplified clojurescript and uberjar build process, working on splitting synchrony into smaller subprojects)
-%   - Dockerization
-%   - Grand vision of splitting synchrony into smaller, easier to maintain pieces
-%     - part 1: clustering
-%       - extracted into synchrony-clustering microservice
-%       - synchrony part is decoupled from the mechanism of getting list of active nodes, so hazelcast-based (or even completely static) implementation can be created for ConfServer synchrony, keeping synchrony identical between cloud and server. 
-%     - part 2: accepting client connections and routing them to correct synchrony processing nodes
-%       - have been accepted as a valuable option by Tobias
-%       - prerequisites for the implementation have been tested
-%       - turned out impossible to implement due sticky sessions being unsupported for websockets in AWS, and direct connections to nodes being disallowed by micros
-%       - investigated an option to use Kubernetes (at that moment it turned out to not be ready for deploying production services)
-%       - have recently found a way to overcome the limitations of aws/micros, so desired architecture could be implemented in a relatively straightforward way. will pursue it after finishing rework of the build pipeline 
-%   - Led Synchrony Architecture Bootcamp (02/05/2017).
-%   - Participated in architecture review (05/06/2017).
-% - Got into Ship-It finals
-% Other than that I have participated in interviewing potential candidates, have been helping with onboarding, have been pairing with other team members, doing on-call job, and working with support to investigate customer issues (sometimes during after hours). 
-% Regarding company values - most of the stuff above is BTCYS, which is the value that resonates the most with me. Help with onboarding, pairing, substituting other team members for on-call time is PAAT. Working with support investigating customer issues, and regular work to make Synchrony more stable/reliable is DFTC. I think that calling up on issues with the codebase and Tobias could be labeled as OCNB, though I'm still unsure if my actions were right.
+\item pushed for changing synchronization data from linear format to tree format, so standard operational
+  transformation logic won't break document structure.
+
+\item implemented tree diffing algorithm to support tree format synchronization
+
+\item made peak hours deployments possible by calculating required dynamo provisioning
+  requirements calculated cluster startup dynamodb usage and increased
+    limits accordingly, which allowed deploying during peak hours
+    with no downtime (previously, deploying during peak hours could
+    lead to downtime up to half an hour).
+\item shrinked application bundle size twice (from 100mb to 50mb), which made deployments noticeably faster
+\item proposed and added jvm memory consumption metrics, so we can see when GC happens and can understand it's implications on the dynamic behavior of the system
+
+
+\item maintainability improvements:
+  \begin{myList}
+  \item reorganization of the code base
+    \begin{myList}
+    \item decluttered repository toplevel
+    \item cleaned up obsolete/abandoned branches (with automatic script to do that periodically)
+    \item removed unused configuration entries
+    \item removed unused dependencies
+    \end{myList}
+  \item shrinked application bundle size twice (from 100mb to 50mb), which made deployments noticeably faster
+  \item calculated cluster startup dynamodb usage and increased
+    limits accordingly, which allowed deploying during peak hours
+    with no downtime (previously, deploying during peak hours could
+    lead to downtime up to half an hour).
+  \item came up with automated versioning strategy in a way that does not require conscious effort from the developers, and is helpful for other teams to understand amount and severity of changes.
+  \item proposed and added jvm memory consumption metrics, so we can see when GC happens and can understand it's implications on the dynamic behavior of the system
+  \end{myList}
+\item productivity
+  \begin{myList}
+  \item found a solution to speed up dev loop for new editor plugin
+    from about 2 minutes recompilation for every change to about a
+    second. In addition it allowed to use Dirac dev tools to work
+    more effectively with ClojureScript in a browser.
+  \item automation of manual deployments. allows developers to
+    test changes in ddev/adev/staging faster. instead of commiting,
+    and clicking your way through bamboo you can deploy your local
+    code tree directly with just one command.
+  \item automation of versioning. Developers don't need to review
+    all code changes since last version change and manually edit the
+    version. After a while you don't even notice that you are doing
+    versioning.
+  \end{myList}
+\item Readability and understandability of the code
+  \begin{myList}
+  \item Insisted on starting doing proper code reviews. Found a
+    compromise to start doing that after going 100\% GA
+  \item created a glossary of terms to increase consistency, and
+    to notice ambiguities in naming we use, so we can improve it.
+  \item have been doing code reviews. gave suggestions on improving naming
+  \item insisted on strict adherence to our code style guide
+  \end{myList}
+\item Architecture
+  \begin{myList}
+  \item Reworking build process (cleaned up a lot of obsolete stuff,
+    simplified clojurescript and uberjar build process)
+  \item Dockerization
+  \item Grand vision of splitting synchrony into smaller, easier to
+    maintain pieces
+    \begin{myList}
+    \item part 1: clustering
+      \begin{myList}
+      \item extracted into synchrony-clustering microservice
+      \item synchrony part is decoupled from the mechanism of getting
+        list of active nodes, so hazelcast-based (or even completely
+        static) implementation can be created for ConfServer synchrony,
+        keeping synchrony identical between cloud and server.
+      \end{myList}
+    \item part 2: accepting client connections and routing them
+      to correct synchrony processing nodes
+      \begin{myList}
+      \item have been accepted as a valuable option by Tobias
+      \item prerequisites for the implementation have been tested
+      \item turned out impossible to implement due sticky sessions
+        being unsupported for websockets in AWS, and direct connections
+        to nodes being disallowed by micros
+      \item investigated an option to use Kubernetes (at that moment
+        it turned out to not be ready for deploying production services)
+      \item have recently found a way to overcome the limitations of
+        aws/micros, so desired architecture could be implemented in a
+        relatively straightforward way. will pursue it after finishing
+        rework of the build pipeline
+      \end{myList}
+    \end{myList}
+  \item Led Synchrony Architecture Bootcamp (02/05/2017).
+  \item Participated in architecture review (05/06/2017).
+  \end{myList}
+\item participated in interviewing potential candidates
+\item have been helping with onboarding of new team members
+\item have been doing pair-programming
+\item participated in team on-call rotation
+\item worked with support team to investigate customer issues
+\item participated in company-wide hackathon (Ship-It) and got into finals
+
 ~
 \end{rSubsection}
 

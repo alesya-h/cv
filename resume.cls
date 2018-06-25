@@ -82,6 +82,20 @@
     \printaddress{\@addresstwo}}
 }
 
+
+%----------------------------------------------------------------------------------------
+%	LIST FORMATTING
+%----------------------------------------------------------------------------------------
+
+\newenvironment{myList}[0]{
+  \begin{list}{$\cdot$}{\leftmargin=1.5em} % \cdot used for bullets, no indentation
+   \itemsep -0.5em \vspace{-0.5em} % Compress items in list together for aesthetics
+  }{
+  \end{list}
+  %\vspace{0.5em} % Some space after the list of bullet points
+}
+
+
 %----------------------------------------------------------------------------------------
 %	SECTION FORMATTING
 %----------------------------------------------------------------------------------------
