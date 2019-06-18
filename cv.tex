@@ -48,14 +48,20 @@ B.S. in Systems Engineering \\
 \begin{rSection}{Have experience with}
 
 \begin{tabular}{ @{} >{\bfseries}l @{\hspace{6ex}} l }
-Operating Systems     & Linux (NixOS, Arch, Debian, CentOS, Ubuntu), Mac OS X \smallskip \\
+Operating Systems     & Linux (NixOS, Archlinux, Debian, CentOS, Ubuntu), Mac OS X \smallskip \\
 Programming Languages & Clojure, Ruby, C, Bash, JavaScript, Perl, Common Lisp, Erlang, \\
-                      & Maude, Factor, Lua, Terra, C++, Python and some others\smallskip \\
+                      & Maude, Factor, Lua, Terra, C++, Python and some others \smallskip \\
+Libraries and Frameworks & React, Reagent, core.async, clojure.spec, prismatic/schema, \\
+                      & mount-lite, Compojure, Kioo, Enlive
+                      % & Rails, Sinatra, Bootstrap, Material UI
+                      \smallskip \\
 Markup and Typesetting & \LaTeX, HTML, Haml, Slim, CSS, SASS/SCSS, Less, Bootstrap \smallskip \\
-Server technologies   & NixOps, Consul, Docker, Dokku, Chef, Nginx, Apache httpd, \\
+Cloud                 & AWS (EC2, S3, IAM, RDS, DynamoDB, Route 53, EKS, ECS), \\
+                      & Docker, Kubernetes, DigitalOcean, Dokku, Heroku \smallskip \\
+Server technologies   & NixOps, Consul, Chef, Nginx, Apache httpd, \\
                       & Postfix, Prosody, vsftpd, Squid, Corosync, Pacemaker, DRBD \smallskip \\
 SQL Databases & PostgreSQL, MySQL/MariaDB, SQLite \smallskip \\
-  NoSQL Databases & Datomic/Datascript, Neo4j, OrientDB, MongoDB, Cassandra \smallskip \\
+  NoSQL Databases & Datomic, DynamoDB, Neo4j, OrientDB, MongoDB, Cassandra \smallskip \\
 % Tools & zsh, git, emacs, vim, tmux, gpicker, ctags, the silver searcher, \\
 %       & GNU Global, splint, gdb, strace, valgrind, gprof \smallskip \\
 Programming paradigms & Imperative, Object-oriented (class-based, prototype-based), \\
@@ -73,102 +79,20 @@ Programming paradigms & Imperative, Object-oriented (class-based, prototype-base
 
 \begin{rSubsection}{Atlassian}{December 2016 - Present}{Senior Clojure Developer}{Sydney, Australia}
 
-\item pushed for changing synchronization data from linear format to tree format, so standard operational
-  transformation logic won't break document structure.
-
-\item implemented tree diffing algorithm to support tree format synchronization
-
-\item made peak hours deployments possible by calculating required dynamo provisioning
-  requirements calculated cluster startup dynamodb usage and increased
-    limits accordingly, which allowed deploying during peak hours
-    with no downtime (previously, deploying during peak hours could
-    lead to downtime up to half an hour).
-\item shrinked application bundle size twice (from 100mb to 50mb), which made deployments noticeably faster
-\item proposed and added jvm memory consumption metrics, so we can see when GC happens and can understand it's implications on the dynamic behavior of the system
-
-
-\item maintainability improvements:
-  \begin{myList}
-  \item reorganization of the code base
-    \begin{myList}
-    \item decluttered repository toplevel
-    \item cleaned up obsolete/abandoned branches (with automatic script to do that periodically)
-    \item removed unused configuration entries
-    \item removed unused dependencies
-    \end{myList}
-  \item shrinked application bundle size twice (from 100mb to 50mb), which made deployments noticeably faster
-  \item calculated cluster startup dynamodb usage and increased
-    limits accordingly, which allowed deploying during peak hours
-    with no downtime (previously, deploying during peak hours could
-    lead to downtime up to half an hour).
-  \item came up with automated versioning strategy in a way that does not require conscious effort from the developers, and is helpful for other teams to understand amount and severity of changes.
-  \item proposed and added jvm memory consumption metrics, so we can see when GC happens and can understand it's implications on the dynamic behavior of the system
-  \end{myList}
-\item productivity
-  \begin{myList}
-  \item found a solution to speed up dev loop for new editor plugin
-    from about 2 minutes recompilation for every change to about a
-    second. In addition it allowed to use Dirac dev tools to work
-    more effectively with ClojureScript in a browser.
-  \item automation of manual deployments. allows developers to
-    test changes in ddev/adev/staging faster. instead of commiting,
-    and clicking your way through bamboo you can deploy your local
-    code tree directly with just one command.
-  \item automation of versioning. Developers don't need to review
-    all code changes since last version change and manually edit the
-    version. After a while you don't even notice that you are doing
-    versioning.
-  \end{myList}
-\item Readability and understandability of the code
-  \begin{myList}
-  \item Insisted on starting doing proper code reviews. Found a
-    compromise to start doing that after going 100\% GA
-  \item created a glossary of terms to increase consistency, and
-    to notice ambiguities in naming we use, so we can improve it.
-  \item have been doing code reviews. gave suggestions on improving naming
-  \item insisted on strict adherence to our code style guide
-  \end{myList}
-\item Architecture
-  \begin{myList}
-  \item Reworking build process (cleaned up a lot of obsolete stuff,
-    simplified clojurescript and uberjar build process)
-  \item Dockerization
-  \item Grand vision of splitting synchrony into smaller, easier to
-    maintain pieces
-    \begin{myList}
-    \item part 1: clustering
-      \begin{myList}
-      \item extracted into synchrony-clustering microservice
-      \item synchrony part is decoupled from the mechanism of getting
-        list of active nodes, so hazelcast-based (or even completely
-        static) implementation can be created for ConfServer synchrony,
-        keeping synchrony identical between cloud and server.
-      \end{myList}
-    \item part 2: accepting client connections and routing them
-      to correct synchrony processing nodes
-      \begin{myList}
-      \item have been accepted as a valuable option by Tobias
-      \item prerequisites for the implementation have been tested
-      \item turned out impossible to implement due sticky sessions
-        being unsupported for websockets in AWS, and direct connections
-        to nodes being disallowed by micros
-      \item investigated an option to use Kubernetes (at that moment
-        it turned out to not be ready for deploying production services)
-      \item have recently found a way to overcome the limitations of
-        aws/micros, so desired architecture could be implemented in a
-        relatively straightforward way. will pursue it after finishing
-        rework of the build pipeline
-      \end{myList}
-    \end{myList}
-  \item Led Synchrony Architecture Bootcamp (02/05/2017).
-  \item Participated in architecture review (05/06/2017).
-  \end{myList}
-\item participated in interviewing potential candidates
-\item have been helping with onboarding of new team members
-\item have been doing pair-programming
-\item participated in team on-call rotation
-\item worked with support team to investigate customer issues
-\item participated in company-wide hackathon (Ship-It) and got into finals
+\item Code health improvements (code reviews, eliminating tech debt, improving development workflow)
+\item GDPR and data eviction project
+\item Analyzed L1-L2 support tickets related to the project, identified that majority of them are related to a troublesome Synchrony server setup in the Data Center configuration, came up with the solution to implement automatic management of Synchrony by Confluence in DC to eliminate the need for separate Synchrony server setup, and collaborated with Confluence Server team to implement it.
+\item Pushed for changing synchronization data from linear to tree format for the new editor integration, so standard operational transformation logic won't break the document structure. Implemented a tree diffing algorithm to support tree format synchronization
+\item Proposed and added jvm memory consumption metrics, so we can see when GC happens and can understand it's implications on the dynamic behavior of the system
+\item Decreased application bundle size twice (from 100mb to 50mb), which made deployments noticeably faster
+\item Calculated cluster startup dynamodb usage and increased limits accordingly, which allowed deploying during peak hours with no downtime (previously, deploying during peak hours could lead to downtime up to half an hour).
+\item Designed and implemented an automated versioning project
+\item Participated in interviewing potential candidates
+\item Have been helping with onboarding of new team members
+\item Led synchrony architecture bootcamp
+\item Worked with support team to investigate customer issues
+\item Participated in the team on-call rotation
+\item Participated in a company-wide hackathon (Ship-It) and got into finals
 
 ~
 \end{rSubsection}
@@ -184,7 +108,7 @@ Programming paradigms & Imperative, Object-oriented (class-based, prototype-base
 \item Implemented production-ready multiserver setup with zero-downtime deployment using NixOS/NixOps and Consul
 \item Refactored most of the project, implemented lots of functionality and fixed lots of bugs (e.g added
   config schema validation, cleaned up garbage logging (like {\tt (println "!!! FOO:" x)}) and implemented
-  propper configurable logging throughout the system, implemented chunked file upload with automatic reconnection, etc.)
+  propper configurable logging throughout the system, implemented chunked file upload with an automatic reconnection, etc.)
 \item Interviewed potential candidates
 \item Regularly did code reviews
 \item Did pair programming (to assist others with complicated tasks, to share project knowledge, to get
@@ -271,23 +195,22 @@ Programming paradigms & Imperative, Object-oriented (class-based, prototype-base
   \item First program in BASIC at age of 11, first HTML and JavaScript at 12, first program in Pascal at 13.
   \item I started playing with Linux when I was 14 (it was Mandrake 10 in 2005)
   \item I use Dvorak keyboard layout
-  \item I use Archlinux with lots of handwritten scripts and i3 tiling window manager as my work environment.
-  \item I tend to automate everything I could.
-  \item I started using Emacs at 2010 and never looked back. Since 2011 I use it with Evil (vim emulation layer)
+  \item I use NixOS with lots of handwritten scripts and a tiling window manager as my work environment. Before NixOS I used to use Archlinux.
+  % \item I tend to automate everything I could.
+  \item I use Emacs since 2010. Since 2011 I use it with Evil (vim emulation layer)
   \item I have dozens of personal opensource projects and have contributed to
         upstream of at least 20 other.
-  \item Some time ago I was passionate about japanese animation, so I learned
-        some japanese and passed an international exam (JLPT4 certificate). I remember myself
-        learning Esperanto and Toki Pona, and now I am learning Lojban.
+  % \item Some time ago I was passionate about japanese animation, so I learned
+  %       some japanese and passed an international exam (JLPT4 certificate). I remember myself
+  %       learning Esperanto and Toki Pona, and now I am learning Lojban.
   \item I am an active ACM and ACM SIGPLAN member.
-  \item One of my primary interests is programming languages. I am still thinking of one
-        that would be perfectly expressive. I have plans for PhD in that field.
-  \item I write tests very rarely and when I feel I wish to write one, I know that
-    I should search for more simple solution that will be obviously working and not
-    require any iterative validation. I do not believe that writing tons
-    of tests may lead to good system design. More often it leads to design that is hard to change
-    in any meaningful way. Instead of going test-first I go think-first, and don't start writing
-    code until I clearly know what I'm going to write and why.
+  \item One of my primary interests is expressivity of programming languages. I have plans to get a PhD in that field.
+  % \item I write tests very rarely and when I feel I wish to write one, I know that
+  %   I should search for more simple solution that will be obviously working and not
+  %   require any iterative validation. I do not believe that writing tons
+  %   of tests may lead to good system design. More often it leads to design that is hard to change
+  %   in any meaningful way. Instead of going test-first I go think-first, and don't start writing
+  %   code until I clearly know what I'm going to write and why.
   \end{list}
 \end{rSection}
 
@@ -299,16 +222,15 @@ Programming paradigms & Imperative, Object-oriented (class-based, prototype-base
   \smallskip
   \begin{list}{$\cdot$}{\leftmargin=0em} % \cdot used for bullets, no indentation
     \itemsep -0.5em \vspace{-0.5em} % Compress items in list together for aesthetics
-  \item Programming paradigms and programming languages
-  \item Rewriting logic (Maude system in particular)
+  \item Semantics of programming languages
+  \item Statistics and Machine Learning
   \item Minimal syntax programming languages: Lisp (Clojure, Common Lisp, Scheme,
         Qi/Shen), FORTH, Factor, APL, Tcl, Refal, Rebol, Smalltalk
+  \item Rewriting logic (Maude system in particular)
   \item Programming music (Overtone, Extempore) and visuals (Quil, Processing, Fluxus)
+  \item Creating electronic music
   \item Learning to draw
-  \item Semantics
-  \item Constructed languages
   \item Neuroscience
-  \item Statistics and Machine Learning
   \end{list}
 \end{rSection}
 
