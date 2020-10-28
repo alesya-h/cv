@@ -41,6 +41,12 @@ B.S. in Systems Engineering \\
 
 \end{rSection}
 
+\begin{rSection}{Certification}
+
+{\bf CO0401EN } Beyond the Basics: Istio and IBM Cloud Kubernetes Service \hfill {\em December 2019} \\
+
+\end{rSection}
+
 %----------------------------------------------------------------------------------------
 %   TECHNOLOGY SECTION
 %----------------------------------------------------------------------------------------
@@ -58,7 +64,7 @@ Libraries and Frameworks & React, Reagent, core.async, clojure.spec, prismatic/s
 Markup and Typesetting & \LaTeX, HTML, Haml, Slim, CSS, SASS/SCSS, Less, Bootstrap \smallskip \\
 Cloud                 & AWS (EC2, S3, IAM, RDS, DynamoDB, Route 53, EKS, ECS), \\
                       & Docker, Kubernetes, DigitalOcean, Dokku, Heroku \smallskip \\
-Server technologies   & NixOps, Consul, Chef, Nginx, Apache httpd, \\
+Server technologies   & NixOps, Consul, Chef, Nginx, Apache httpd, statsd \\
                       & Postfix, Prosody, vsftpd, Squid, Corosync, Pacemaker, DRBD \smallskip \\
 SQL Databases & PostgreSQL, MySQL/MariaDB, SQLite \smallskip \\
   NoSQL Databases & Datomic, DynamoDB, Neo4j, OrientDB, MongoDB, Cassandra \smallskip \\
@@ -77,11 +83,25 @@ Programming paradigms & Imperative, Object-oriented (class-based, prototype-base
 
 \begin{rSection}{Work positions}
 
-\begin{rSubsection}{Atlassian}{December 2016 - Present}{Senior Clojure Developer}{Sydney, Australia}
+\begin{rSubsection}{Atlassian, Confluence Server}{January 2018 - Present}{Senior Developer (Synchrony, Clojure)}{Sydney, Australia}
+\item Analyzed L1-L2 support tickets related to the project, identified that majority of them are related to a troublesome Synchrony server setup in the Data Center configuration, came up with the solution to implement automatic management of Synchrony by Confluence in DC to eliminate the need for separate Synchrony server setup, and collaborated with Confluence Server Scale team to implement it.
+\item Fork Synchrony to maintain a version for Confluence server, separate from Confluence Cloud, as teams are very far and don't communicate, and projects have very different infrastructure and needs. Removed cloud-specific build steps, code and configurations (docker cloud tests, building PaaS jar, cloud loadtest, s3 and dynamodb storage backends, redis caching, cloud-specific encryption, ec2 elb node discovery, aws logging, PaaS statsd, cloud metrics, etc.)
+\item Build and development setup simplifications and improvements (move to just leiningen instead of bash+gulp+leiningen, remove most leiningen profiles, don't compile java, don't preprocess JS)
+% \item Migrate from .lein-env to just environment variables for configuration
+\item Refactored the code from component to mount-lite. This led to significant simplification of the code, with more explicit graph of dependencies, and significantly improved ability to work with code interactively from the repl.
+\item Collected all configuration decisions in a single namespace. Previously many configuration options existed in a configuration namespace, but a lot of things have been using environ directly or using other means to detect certain runtime configurations (e.g. running in a cloud PaaS environment, on dev machine, in loadtest etc.). This allowed to ensure that differences between code paths in dev, test and prod environments are explicit and kept to a very minimum.
+\item Implemented generic managed cluster-shared state as atoms on top of hazelcast's IMap. This allowed working with this distributed state the same way as if it were a normal local clojure atom, getting notifications when the state changes, using all clojure standard library functions for atoms, etc.
+\item Found a workaround for a bug in core.async that causes exceptions to be thrown from an incorrect stack frame (https://clojure.atlassian.net/browse/ASYNC-198)
+\item Implemented hub locking for the data eviction project.
+\item Created simple and extendable cli tooling for all development, build, test, release and other tasks.
+\item Worked with support team to investigate customer issues
+~
+\end{rSubsection}
+
+\begin{rSubsection}{Atlassian, Confluence Cloud}{December 2016 - January 2018}{Senior Developer (Synchrony, Clojure)}{Sydney, Australia}
 
 \item Code health improvements (code reviews, eliminating tech debt, improving development workflow)
 \item GDPR and data eviction project
-\item Analyzed L1-L2 support tickets related to the project, identified that majority of them are related to a troublesome Synchrony server setup in the Data Center configuration, came up with the solution to implement automatic management of Synchrony by Confluence in DC to eliminate the need for separate Synchrony server setup, and collaborated with Confluence Server team to implement it.
 \item Pushed for changing synchronization data from linear to tree format for the new editor integration, so standard operational transformation logic won't break the document structure. Implemented a tree diffing algorithm to support tree format synchronization
 \item Proposed and added jvm memory consumption metrics, so we can see when GC happens and can understand it's implications on the dynamic behavior of the system
 \item Decreased application bundle size twice (from 100mb to 50mb), which made deployments noticeably faster
@@ -90,48 +110,47 @@ Programming paradigms & Imperative, Object-oriented (class-based, prototype-base
 \item Participated in interviewing potential candidates
 \item Have been helping with onboarding of new team members
 \item Led synchrony architecture bootcamp
-\item Worked with support team to investigate customer issues
 \item Participated in the team on-call rotation
 \item Participated in a company-wide hackathon (Ship-It) and got into finals
-
 ~
 \end{rSubsection}
 
-\begin{rSubsection}{Filemporium}{July 2015 - December 2016}{Lead Clojure Developer}{Remote via Upwork}
-\item Setup temporary deplyoment via docker and dokku
+\begin{rSubsection}{Filemporium/Ourmedian}{July 2015 - December 2016}{Lead Clojure Developer}{Remote via Upwork}
+\item Interviewed potential candidates
+\item Regularly did code reviews
+\item Documented project structure, project-specific code conventions, technical decisions,
+  troubleshooting, and Amazon S3 project-specific step-by-step configuration guide
+\item Did pair programming (to assist others with complicated tasks, to share project knowledge, to get
+  back on track when I'm stuck)
 \item Revised architecture in a way that drastically simplified client-side
   state management and allowed live page update of all active user sessions
 \item Reengineered project build system using boot (previously leiningen were used).
   Fixed project build time (full recompilation now takes just a couple of minutes
   instead of an hour). Adjusted project code to work with reloaded workflow.
-\item Documented project structure, project-specific code conventions, technical decisions, troubleshooting, and Amazon S3 project-specific step-by-step configuration guide
-\item Implemented production-ready multiserver setup with zero-downtime deployment using NixOS/NixOps and Consul
 \item Refactored most of the project, implemented lots of functionality and fixed lots of bugs (e.g added
   config schema validation, cleaned up garbage logging (like {\tt (println "!!! FOO:" x)}) and implemented
   propper configurable logging throughout the system, implemented chunked file upload with an automatic reconnection, etc.)
-\item Interviewed potential candidates
-\item Regularly did code reviews
-\item Did pair programming (to assist others with complicated tasks, to share project knowledge, to get
-  back on track when I'm stuck)
-\item Fired a programmer that have been writing terrible code
+\item Setup temporary deplyoment via docker and dokku
+\item Implemented production-ready multiserver setup with zero-downtime deployment using NixOS/NixOps and Consul
+\item Let go of a programmer that have been writing terrible code
 \end{rSubsection}
 
-\begin{rSubsection}{Filemporium}{May 2015 - July 2015}{Clojure Developer}{Remote via Upwork}
+\begin{rSubsection}{Filemporium/Ourmedian}{May 2015 - July 2015}{Clojure Developer}{Remote via Upwork}
 \item Automated design updates
 \item Added compile-time template checks to kioo templating library to ensure
-  component correctness after design update
+  component correctness after a design update
 \item Added support for using arbitrary npm libraries from ClojureScript code (to be
   able to utilize existing js React components)
 \item Started writing project documentation. Documented actions needed to setup
-  a project, update design, add npm library
+  a project, update the design, add an npm library
 
 % ~
 \end{rSubsection}
 
 \begin{rSubsection}{Softswiss Casino Software}{October 2014 - May 2015}{Senior Software Engineer}{Minsk, Belarus}
 \item Implemented integrations with external game providers (CasinoTechnology, Fengaming)
-\item Implemented completely custom design for new customer (HTML/CSS)
-\item Worked on external wallet api implementation
+\item Implemented completely custom design for a new customer (HTML/CSS)
+\item Worked on an external wallet api implementation
 \end{rSubsection}
 
 \begin{rSubsection}{Rubyroid Labs, LLC}{April 2014 - September 2014}{Senior Software Engineer/Team Leader}{Minsk, Belarus}
@@ -195,7 +214,8 @@ Programming paradigms & Imperative, Object-oriented (class-based, prototype-base
   \item First program in BASIC at age of 11, first HTML and JavaScript at 12, first program in Pascal at 13.
   \item I started playing with Linux when I was 14 (it was Mandrake 10 in 2005)
   \item I use Dvorak keyboard layout
-  \item I use NixOS with lots of handwritten scripts and a tiling window manager as my work environment. Before NixOS I used to use Archlinux.
+  \item I use NixOS, and maintain a few packages in it. Before NixOS I used to use Archlinux.
+  \item For many years I used to use tiling window managers and a very minimalistic desktop setup. I switched to Gnome Shell just over a year ago though.
   % \item I tend to automate everything I could.
   \item I use Emacs since 2010. Since 2011 I use it with Evil (vim emulation layer)
   \item I have dozens of personal opensource projects and have contributed to
@@ -203,8 +223,8 @@ Programming paradigms & Imperative, Object-oriented (class-based, prototype-base
   % \item Some time ago I was passionate about japanese animation, so I learned
   %       some japanese and passed an international exam (JLPT4 certificate). I remember myself
   %       learning Esperanto and Toki Pona, and now I am learning Lojban.
-  \item I am an active ACM and ACM SIGPLAN member.
-  \item One of my primary interests is expressivity of programming languages. I have plans to get a PhD in that field.
+  % \item I am an active ACM and ACM SIGPLAN member.
+  \item One of my primary interests is expressivity of programming languages. I hope to study it as a PhD student one day.
   % \item I write tests very rarely and when I feel I wish to write one, I know that
   %   I should search for more simple solution that will be obviously working and not
   %   require any iterative validation. I do not believe that writing tons
@@ -222,15 +242,15 @@ Programming paradigms & Imperative, Object-oriented (class-based, prototype-base
   \smallskip
   \begin{list}{$\cdot$}{\leftmargin=0em} % \cdot used for bullets, no indentation
     \itemsep -0.5em \vspace{-0.5em} % Compress items in list together for aesthetics
-  \item Semantics of programming languages
   \item Statistics and Machine Learning
-  \item Minimal syntax programming languages: Lisp (Clojure, Common Lisp, Scheme,
-        Qi/Shen), FORTH, Factor, APL, Tcl, Refal, Rebol, Smalltalk
-  \item Rewriting logic (Maude system in particular)
+  \item Semantics of programming languages
+  % \item Programming languages with a minimalistic syntax: Lisp (Clojure, Common Lisp, Scheme,
+  %       Qi/Shen), FORTH, Factor, APL, Tcl, Refal, Rebol, Smalltalk
+  % \item Rewriting logic (Maude system in particular)
   \item Programming music (Overtone, Extempore) and visuals (Quil, Processing, Fluxus)
   \item Creating electronic music
-  \item Learning to draw
-  \item Neuroscience
+  % \item Learning to draw
+  % \item Neuroscience
   \end{list}
 \end{rSection}
 
