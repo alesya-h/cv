@@ -84,16 +84,16 @@ Programming paradigms & Imperative, Object-oriented (class-based, prototype-base
 \begin{rSection}{Work positions}
 
 \begin{rSubsection}{Atlassian, Confluence Server}{January 2018 - Present}{Senior Developer (Synchrony, Clojure)}{Sydney, Australia}
-\item Analyzed L1-L2 support tickets related to the project, identified that majority of them are related to a troublesome Synchrony server setup in the Data Center configuration, came up with the solution to implement automatic management of Synchrony by Confluence in DC to eliminate the need for separate Synchrony server setup, and collaborated with Confluence Server Scale team to implement it.
+\item Analyzed L1-L2 support tickets related to the project, identified that majority of them are related to a troublesome Synchrony server setup in the Data Center configuration, came up with the solution to implement automatic management of Synchrony by Confluence in DC to eliminate the need for separate Synchrony server setup, and collaborated with Confluence Server Scale team to implement it
 \item Fork Synchrony to maintain a version for Confluence server, separate from Confluence Cloud, as teams are very far and don't communicate, and projects have very different infrastructure and needs. Removed cloud-specific build steps, code and configurations (docker cloud tests, building PaaS jar, cloud loadtest, s3 and dynamodb storage backends, redis caching, cloud-specific encryption, ec2 elb node discovery, aws logging, PaaS statsd, cloud metrics, etc.)
 \item Build and development setup simplifications and improvements (move to just leiningen instead of bash+gulp+leiningen, remove most leiningen profiles, don't compile java, don't preprocess JS)
 % \item Migrate from .lein-env to just environment variables for configuration
-\item Refactored the code from component to mount-lite. This led to significant simplification of the code, with more explicit graph of dependencies, and significantly improved ability to work with code interactively from the repl.
-\item Collected all configuration decisions in a single namespace. Previously many configuration options existed in a configuration namespace, but a lot of things have been using environ directly or using other means to detect certain runtime configurations (e.g. running in a cloud PaaS environment, on dev machine, in loadtest etc.). This allowed to ensure that differences between code paths in dev, test and prod environments are explicit and kept to a very minimum.
+\item Refactored the code from component to mount-lite. This led to significant simplification of the code, with more explicit graph of dependencies, and significantly improved ability to work with code interactively from the REPL
+\item Collected all configuration decisions in a single namespace. Previously many configuration options existed in a configuration namespace, but a lot of things have been using environ directly or using other means to detect certain runtime configurations (e.g. running in a cloud PaaS environment, on dev machine, in loadtest etc.). This allowed to ensure that differences between code paths in dev, test and prod environments are explicit and kept to a very minimum
 \item Implemented generic managed cluster-shared state as atoms on top of hazelcast's IMap. This allowed working with this distributed state the same way as if it were a normal local clojure atom, getting notifications when the state changes, using all clojure standard library functions for atoms, etc.
 \item Found a workaround for a bug in core.async that causes exceptions to be thrown from an incorrect stack frame (https://clojure.atlassian.net/browse/ASYNC-198)
-\item Implemented hub locking for the data eviction project.
-\item Created simple and extendable cli tooling for all development, build, test, release and other tasks.
+\item Implemented hub locking for the data eviction project
+\item Created simple and extendable cli tooling for all development, build, test, release and other tasks
 \item Worked with support team to investigate customer issues
 \item Introduced Renovate to automatically manage dependency version upgrades in Confluence Server
 ~
@@ -106,7 +106,7 @@ Programming paradigms & Imperative, Object-oriented (class-based, prototype-base
 \item Pushed for changing synchronization data from linear to tree format for the new editor integration, so standard operational transformation logic won't break the document structure. Implemented a tree diffing algorithm to support tree format synchronization
 \item Proposed and added jvm memory consumption metrics, so we can see when GC happens and can understand it's implications on the dynamic behavior of the system
 \item Decreased application bundle size twice (from 100mb to 50mb), which made deployments noticeably faster
-\item Calculated cluster startup dynamodb usage and increased limits accordingly, which allowed deploying during peak hours with no downtime (previously, deploying during peak hours could lead to downtime up to half an hour).
+\item Calculated cluster startup dynamodb usage and increased limits accordingly, which allowed deploying during peak hours with no downtime (previously, deploying during peak hours could lead to downtime up to half an hour)
 \item Designed and implemented an automated versioning project
 \item Participated in interviewing potential candidates
 \item Have been helping with onboarding of new team members
@@ -125,9 +125,9 @@ Programming paradigms & Imperative, Object-oriented (class-based, prototype-base
   back on track when I'm stuck)
 \item Revised architecture in a way that drastically simplified client-side
   state management and allowed live page update of all active user sessions
-\item Reengineered project build system using boot (previously leiningen were used).
+\item Reengineered project build system using boot (previously leiningen were used)
   Fixed project build time (full recompilation now takes just a couple of minutes
-  instead of an hour). Adjusted project code to work with reloaded workflow.
+  instead of an hour). Adjusted project code to work with reloaded workflow
 \item Refactored most of the project, implemented lots of functionality and fixed lots of bugs (e.g added
   config schema validation, cleaned up garbage logging (like {\tt (println "!!! FOO:" x)}) and implemented
   propper configurable logging throughout the system, implemented chunked file upload with an automatic reconnection, etc.)
@@ -171,34 +171,34 @@ Programming paradigms & Imperative, Object-oriented (class-based, prototype-base
 \end{rSubsection}
 
 \begin{rSubsection}{\parbox[t][2em][t]{9cm}{Belarusian State University of Informatics and Radioelectronics}}{February 2013 - January 2014 }{Teaching assistant at Electronic Computing Machines Department (part-time)}{Minsk, Belarus}
-\item Taught first-year students programming in C.
-\item Taught fourth-year students IP networking.
-\item Taught students how to use Git and GitHub.
-\item Together with students formalized grading criteria.
-\item Formalized some code quality metrics.
-\item Regularly reviewed students' code.
-\item Taught Linux for interested students in my spare time.
+\item Taught first-year students programming in C
+\item Taught fourth-year students IP networking
+\item Taught students how to use Git and GitHub
+\item Together with students formalized grading criteria
+\item Formalized some code quality metrics
+\item Regularly reviewed students' code
+\item Taught Linux for interested students in my spare time
 \end{rSubsection}
 
 \begin{rSubsection}{PowerMeMobile, Inc.}{January 2013 - February 2013}{Problem solver}{Minsk, Belarus}
 \item Gave an idea of automating deployment process (new tier deployments may take up to
-  a month of SysAdmin team work).
+  a month of SysAdmin team work)
 \item Implemented initial stages of deployment automation (installing base cluster software,
-  configuring corosync/pacemaker, installing and configuring DRBD and nginx as resource agents) using Chef.
-\item Made entire deployment configurable from a single place (from chef workstation using node attributes).
-\item Got an agreement on opensourcing this efforts.
+  configuring corosync/pacemaker, installing and configuring DRBD and nginx as resource agents) using Chef
+\item Made entire deployment configurable from a single place (from chef workstation using node attributes)
+\item Got an agreement on opensourcing this efforts
 \end{rSubsection}
 
 \begin{rSubsection}{Altoros Systems, Inc.}{October 2011 - September 2012}{Software Engineer in Ruby department}{Minsk, Belarus}
-\item Proved that custom multisite functionality is a bad idea. Dropped the hacks and refactored application to use rails 3 engines.
-\item Participated in porting internal RightScale services (mostly sinatra+cassandra) to JRuby to utilize native Thrift.
-\item Participated in all stages of design and development on many projects.
+\item Proved that custom multisite functionality is a bad idea. Dropped the hacks and refactored application to use rails 3 engines
+\item Participated in porting internal RightScale services (mostly sinatra+cassandra) to JRuby to utilize native Thrift
+\item Participated in all stages of design and development on many projects
 \end{rSubsection}
 
 \begin{rSubsection}{Itransition, Inc.}{February 2011 - October 2011}{Junior Developer in Ruby department}{Minsk, Belarus}
-\item Solely ported large social gaming engine from Rails 2 to Rails 3.
-\item Initiated using SCSS and Compass, which led to stylesheets development and modification speedup.
-\item Configured production server from scratch and setup automated Capistrano deployment.
+\item Solely ported large social gaming engine from Rails 2 to Rails 3
+\item Initiated using SCSS and Compass, which led to stylesheets development and modification speedup
+\item Configured production server from scratch and setup automated Capistrano deployment
 \end{rSubsection}
 
 \end{rSection}
@@ -211,27 +211,27 @@ Programming paradigms & Imperative, Object-oriented (class-based, prototype-base
   \smallskip
   \begin{list}{$\cdot$}{\leftmargin=0em} % \cdot used for bullets, no indentation
     \itemsep -0.5em \vspace{-0.5em} % Compress items in list together for aesthetics
-  \item I decided to tie my work to computers when I was 5.
-  \item First program in BASIC at age of 11, first HTML and JavaScript at 12, first program in Pascal at 13.
+  \item I decided to tie my work to computers when I was 5
+  \item First program in BASIC at age of 11, first HTML and JavaScript at 12, first program in Pascal at 13
   \item I started playing with Linux when I was 14 (it was Mandrake 10 in 2005)
   \item I use Dvorak keyboard layout
-  \item I use NixOS, and maintain a few packages in it. Before NixOS I used to use Archlinux.
-  \item For many years I used to use tiling window managers and a very minimalistic desktop setup. I switched to Gnome Shell just over a year ago though.
-  % \item I tend to automate everything I could.
+  \item I use NixOS, and maintain a few packages in it. Before NixOS I used to use Archlinux
+  \item For many years I used to use tiling window managers and a very minimalistic desktop setup. I switched to Gnome Shell just over a year ago though
+  % \item I tend to automate everything I could
   \item I use Emacs since 2010. Since 2011 I use it with Evil (vim emulation layer)
   \item I have dozens of personal opensource projects and have contributed to
-        upstream of at least 20 other.
+        upstream of at least 20 other
   % \item Some time ago I was passionate about japanese animation, so I learned
   %       some japanese and passed an international exam (JLPT4 certificate). I remember myself
-  %       learning Esperanto and Toki Pona, and now I am learning Lojban.
-  % \item I am an active ACM and ACM SIGPLAN member.
-  \item One of my primary interests is expressivity of programming languages. I hope to study it as a PhD student one day.
+  %       learning Esperanto and Toki Pona, and now I am learning Lojban
+  % \item I am an active ACM and ACM SIGPLAN member
+  \item One of my primary interests is expressivity of programming languages. I hope to study it as a PhD student one day
   % \item I write tests very rarely and when I feel I wish to write one, I know that
   %   I should search for more simple solution that will be obviously working and not
   %   require any iterative validation. I do not believe that writing tons
   %   of tests may lead to good system design. More often it leads to design that is hard to change
   %   in any meaningful way. Instead of going test-first I go think-first, and don't start writing
-  %   code until I clearly know what I'm going to write and why.
+  %   code until I clearly know what I'm going to write and why
   \end{list}
 \end{rSection}
 
