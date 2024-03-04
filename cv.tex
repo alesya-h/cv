@@ -54,20 +54,26 @@ B.S. in Systems Engineering \\
 \begin{rSection}{Have experience with}
 
 \begin{tabular}{ @{} >{\bfseries}l @{\hspace{6ex}} l }
-Operating Systems     & Linux (NixOS, Archlinux, Debian, CentOS, Ubuntu), Mac OS X \smallskip \\
-Programming Languages & Clojure, Ruby, C, Bash, JavaScript, Perl, Common Lisp, Erlang, \\
-                      & Maude, Factor, Lua, Terra, C++, Python and some others \smallskip \\
-Libraries and Frameworks & React, Reagent, core.async, clojure.spec, prismatic/schema, \\
-                      & mount-lite, Compojure, Kioo, Enlive
+Operating Systems     & Linux (NixOS, Archlinux, Debian, CentOS, Ubuntu), \\
+                      & Mac OS X, Windows (3.11 -- 11), DOS \smallskip \\
+Programming Languages & Clojure, Ruby, C, Nushell, POSIX shell (bash, zsh), \\
+                      & JavaScript, Common Lisp, Vala, Erlang, Rakudo, Perl, \\
+                      & Maude, Factor, Lua, Terra, C++, Python, Golang and some others \smallskip \\
+Libraries and Frameworks & React, Reagent, core.async, malli, \\
+                      & clojure.spec (+v2), prismatic/schema, \\
+                      & jdbc.next, component, mount-lite, mount, Compojure, Kioo, Enlive
                       % & Rails, Sinatra, Bootstrap, Material UI
                       \smallskip \\
 Markup and Typesetting & \LaTeX, HTML, Haml, Slim, CSS, SASS/SCSS, Less, Bootstrap \smallskip \\
 Cloud                 & AWS (EC2, S3, IAM, RDS, DynamoDB, Route 53, EKS, ECS), \\
-                      & Docker, Kubernetes, DigitalOcean, Dokku, Heroku \smallskip \\
-Server technologies   & NixOps, Consul, Chef, Nginx, Apache httpd, statsd \\
-                      & Postfix, Prosody, vsftpd, Squid, Corosync, Pacemaker, DRBD \smallskip \\
+                      & DigitalOcean, Cloudflare, Vultr, Linode, Heroku \smallskip \\
+Linux, DevOps, system & Docker/podman, docker-compose, Kubernetes, \\
+administration, networking & Terraform, Consul, Chef, libvirtd (kvm, libvirt-lxc), dokku, \\
+                      & Nginx, Apache httpd, statsd, Postfix, Prosody, vsftpd, Squid, \\
+                      & Corosync, Pacemaker, DRBD \smallskip \\
+Nix-based technologies & NixOS, nix flakes, Colmena, NixOps \smallskip \\
 SQL Databases & PostgreSQL, MySQL/MariaDB, SQLite \smallskip \\
-  NoSQL Databases & Datomic, DynamoDB, Neo4j, OrientDB, MongoDB, Cassandra \smallskip \\
+NoSQL Databases & Redis, Datomic, DynamoDB, Neo4j, OrientDB, MongoDB, Cassandra \smallskip \\
 % Tools & zsh, git, emacs, vim, tmux, gpicker, ctags, the silver searcher, \\
 %       & GNU Global, splint, gdb, strace, valgrind, gprof \smallskip \\
 Programming paradigms & Imperative, Object-oriented (class-based, prototype-based), \\
@@ -83,7 +89,91 @@ Programming paradigms & Imperative, Object-oriented (class-based, prototype-base
 
 \begin{rSection}{Work positions}
 
-\begin{rSubsection}{Atlassian, Confluence Server}{January 2018 - Present}{Senior Developer (Synchrony, Clojure)}{Sydney, Australia}
+\begin{rSubsection}{CIM}{25 September 2023 - 15 January 2024}{Senior Software Engineer}{Sydney, Australia} % 3.5 months
+\item Wrote a parser for a new meter data format
+\item Reworked parser resolution from "magic" `requiring-resolve`-based to explicit one, so various clojure
+    tools would see a proper namespace dependency tree and not a bunch of dead code namespaces.
+\item Lead the effort to migrate our internal SDK to use AWS SDK for Java v2, so we can migrate from JDK 11 to JDK 21.
+    Updated the SDK, tests, and a few core services to use it.
+~
+\end{rSubsection}
+
+\begin{rSubsection}{Audience Republic}{February 2023 - 31 July 2023}{Software Architect}{Sydney, Australia} % 5 months
+\item Designed linear-space short urls for SMS. When the number of SMS messages we were sending started to grow, generation of
+    unique short urls (for tracking purposes) became a bottleneck. Originally what it'd do is it'd try to insert a random string
+    of a specified length into the database and if that fails due a collision it'd retry up to 10 times. We couldn't generate
+    them in bulk because a collision inside a batch would make the entire insert to fail. Moreover if sending a batch would fail
+    we would waste those urls. The solution I came up with was to use a linear space for short urls and separate allocation and
+    use of short urls, using a format-preserving encryption algorithm to make allocated short urls look random. The background task
+    would keep a large number (about 1 million) of preallocated urls available for use, and any task that needed short urls could
+    just take however many it needs via `select ... limit ? for update skip locked`, so tasks can take them concurrently, and if
+    a task fails it's transaction would rollback releasing those short urls back into the pool.
+\item switched all production servers from manual long-term ssl certificates to Let's Encrypt wildcard certificates with automatic
+    refresh and sync across servers 
+\item Designed and bult a campaign bot that allows to simulate user activity, with time travel, for an arbitrary number of users on
+    campaigns made for demo and sales purposes. This allows the sales team, when going to a potential customer, to create campaigns
+    that mimic what that company would have and populate it with reasonable-looking user activity, so they can see stats, graphs with
+    activity distributions (sharing via social media etc.), referral registration percentages spanning days and months etc.
+\item Most of the project test coverage was in a form of integration tests (many of which were point-and-click browser recordings).
+    While it did cover a substantial portion of functionality we had no idea what is actually covered. I hacked a code coverage library
+    (cloverage) into the project in a way that allows it to keep track of all the code being ran when coverage tracking is enabled
+    (it's only enabled on the server used as a target of those integration tests), so we can extract coverage data from this live
+    server after running tests
+\item While working on the automation project I created a dsl wrapper around our resource dsl that was significantly more readable.
+    Once other engineers discovered it they asked for it to be moved into the core of the project as a primary interface for working
+    with db entities, which we gladly did.
+\item Automation: new frontiers - search-based triggers. Automation became a popular part of the platform for customers but they wanted
+    to have an ability to trigger certain actions once a user starts or stops to match certain criteria (the platform already had very
+    involved functionality for building multistage filters and saving them as segments). I designed and implemented search-based triggers
+    in a way that was performant and didn't affect the rest of the platform. This was crucial since tables used for filters are the
+    largest (few terabytes) and, despite a lot of denormalisation and other optimisation work, some segments are so complex they still require 
+    several minutes to run (since customers are allowed to make them arbitrarily complex)
+~
+\end{rSubsection}
+
+\begin{rSubsection}{Audience Republic}{April 2021 - February 2023}{Team Lead}{Sydney, Australia} % 1 year 10 months (22 months)
+\item Leading the team working on the Automation project from inception to production release and beyond
+\item Sourcing, interviewing, hiring candidates for the automation team
+\item Training and mentoring new hires
+\item Building and iterating on processes for managing the team (I was the first team lead at the company,
+    previously there were just developers under the CTO)
+\item Introduced JIRA in the company (previously a mix of Trello and Notion pages were used, JIRA started as
+    a tool for my team and then became the main and only project management tool for the company)
+\item Work estimation, planning, tracking team progress
+\item Monitoring team health with 1-on-1 meetings, negotiating team needs with CTO and CEO (introducing
+    paid leave and public holidays for engineers working remotely as contractors)
+\item CNAME project (allowing customers to use customer-titled subdomains for their campains)
+\item Wave (company's long shot experiment) -- a mobile app for one-to-many communications of artists/promoters
+    with their fans. I designed the backend with quick prototyping and future scaling in mind (messaging
+    backend was based on the Matrix protocol and Synapse was used as a messaging backend) and setup all
+    necessary infrastructure. My team (plus a contractor mobile developer) built it. The project was released
+    on Google Play and Apple AppStore, but was quickly deprioritised due lack of adoption.
+\item Migrated the project from an abandoned postgres.async sql driver to standard jdbc (and jdbc.next clojure library).
+    Wrote tools to find all sql queries that rely on positional parameter numbers (postgres.async uses \$1, \$2 to refer
+    to parameters, so unlike with jdbc they can be reused in a query), rewrote queries, added a shim layer that allowed
+    both sql backends to coexist by transparently translating old-style queries into the new style as long as all parameters
+    are used in the query and are in a sequential order.
+~
+\end{rSubsection}
+
+\begin{rSubsection}{Audience Republic}{January 2021 - April 2021}{Senior Backend Developer}{Sydney, Australia} % 4 months
+\item Designed Automation subsystem of the product. It's a custom visual programming language for promoters to describe
+    workflows that trigger in response to ceartain fan actions. E.g. "when fan purchases a ticket to this event we want
+    to add a tag to that fan, send them an email, wait until event date, send another email with an event reminder" etc.
+\item Participated in sourcing, interviewing, hiring candidates
+\item Found a solution to a scaling issue related to generation of tracking links when sending emails 
+\item Designed a solution to scale integrations synchronisation without collisions %(select for update skip locked?)
+\item Introduced database migrations via migratus library. Previously db changes were
+    just written as sql text in release notes and were only made by the CTO
+\item When I joined the project had 2 "app" repositories and one "shared library" repository. This was leading to very
+    complicated and slow process when "library" code was touched both during development and release processes (especially
+    given the team was really small). I merged all 3 repositories in a way that preserved all the history of all three of
+    them, so we ended up with a single clojure project having multiple main namespaces and ability to still have `git blame`
+    for every piece of the source code. Iteration became much easier and we never looked back.
+~
+\end{rSubsection}
+
+\begin{rSubsection}{Atlassian, Confluence Server}{January 2018 - December 2020}{Senior Developer (Synchrony, Clojure)}{Sydney, Australia}
 \item Analyzed L1-L2 support tickets related to the project, identified that majority of them are related to a troublesome Synchrony server setup in the Data Center configuration, came up with the solution to implement automatic management of Synchrony by Confluence in DC to eliminate the need for separate Synchrony server setup, and collaborated with Confluence Server Scale team to implement it
 \item Fork Synchrony to maintain a version for Confluence server, separate from Confluence Cloud, as teams are very far and don't communicate, and projects have very different infrastructure and needs. Removed cloud-specific build steps, code and configurations (docker cloud tests, building PaaS jar, cloud loadtest, s3 and dynamodb storage backends, redis caching, cloud-specific encryption, ec2 elb node discovery, aws logging, PaaS statsd, cloud metrics, etc.)
 \item Build and development setup simplifications and improvements (move to just leiningen instead of bash+gulp+leiningen, remove most leiningen profiles, don't compile java, don't preprocess JS)
