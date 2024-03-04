@@ -1,0 +1,14 @@
+Hi,
+
+My name is Alesya. I currently work at Atlassian, and I've been doing Clojure commercially for the last 5 years.
+
+Before joining Atlassian, I worked at a startup, where I led a team of 3 Clojure programmers. I was responsible for the overall product architecture, including backend, frontend and infrastructure (deployment automation, monitoring, clustering, etc.).
+
+At Atlassian, I work on Synchrony, a collaborative editing engine behind Confluence. I've been a part of big Synchrony-related projects: GDPR and data eviction, Managed Synchrony for Confluence Data Center, new editor integration, etc. I have a focus on maintainability improvements, dev speed, and tech debt elimination.
+
+I am a frequent attendee of clj-syd meetups, and have participated in organizing them when they were held at Atlassian.
+
+Given this vacancy is still open, you might still be looking for someone to replace Sam and Filippo. I think I might be a good candidate.
+
+Kind regards,
+Alesya
